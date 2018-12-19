@@ -8,16 +8,16 @@ const SingleRecipe = ({ recipe }) => {
             <h5>Added {recipe.date}</h5>
             <h4>Ingredients: </h4>
             <ul>
-                {recipe.ingredients.map(ingredient => (
-                    <li>
+                {recipe.ingredients.map((ingredient, index) => (
+                    <li key={index}>
                         {ingredient}
                     </li>
                 ))}
             </ul>
             <h4>Steps: </h4>
             <ul>
-                {recipe.steps.map(step => (
-                    <li>
+                {recipe.steps.map((step, index) => (
+                    <li key={index}>
                         {step}
                     </li>
                 ))}

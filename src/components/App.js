@@ -6,6 +6,7 @@ import React from "react";
 import { hot } from "react-hot-loader";
 
 import AllRecipes from "./AllRecipes";
+import NewRecipePage from "./containers/NewRecipePage";
 
 class App extends React.Component {
     render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
                 </div>
                 <Switch>
                     <Route exact path="/" component={AllRecipes} />
+                    <Route exact path="/NewRecipe" component={NewRecipePage} />
                 </Switch>
             </div>
         )
