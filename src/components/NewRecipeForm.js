@@ -3,7 +3,7 @@ import {func} from 'prop-types';
 import NewRecipeInput from './NewRecipeInput';
 import {newRecipe} from '../types';
 
-const NewRecipeForm = ({fuelSavings, onSaveClick, onChange}) => (
+const NewRecipeForm = ({newRecipe, onSaveClick, onChange}) => (
   <div>
     <h2>Add New Recipe</h2>
     <table>
@@ -35,7 +35,7 @@ const NewRecipeForm = ({fuelSavings, onSaveClick, onChange}) => (
 );
 
 NewRecipeForm.propTypes = {
-  onSaveClick: func.isRequired,
+  // onSaveClick: func.isRequired,
   onChange: func.isRequired,
   newRecipe: newRecipe.isRequired
 };

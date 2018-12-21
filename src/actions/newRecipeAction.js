@@ -1,12 +1,15 @@
 import * as types from '../constants/actionTypes';
 import {getFormattedDateTime} from '../utils/dates';
 
-export function calculateFuelSavings(description, ingredients, steps) {
+export function saveNewRecipe(settings, fieldName, value) {
+  console.log("calling newRecipeAction.js")
     return {
       type: types.ADD_NEW_RECIPE,
-      dateModified: getFormattedDateTime(),
-      description,
-      ingredients,
-      steps
+      payload: {
+        dateModified: getFormattedDateTime(),
+        settings,
+        fieldName,
+        value
+      }
     };
   }

@@ -6,16 +6,19 @@ import * as actions from '../../actions/newRecipeAction';
 import NewRecipeForm from '../NewRecipeForm';
 
 export class NewRecipePage extends React.Component {
-saveNewRecipe = () => {
-    this.props.actions.saveNewRecipe(this.props.newRecipe)
-}
+
+    saveNewRecipeHandler = e => {
+        console.log("Calling saveNewRecipe function within NewRecipePage.js")
+        this.props.actions.saveNewRecipe(this.props.newRecipe, e.target.name, e.target.value);
+    }
 
     render() {
         return (
             <NewRecipeForm
-            onSaveClick={this.saveNewRecipe}
-            newRecipe={this.props.newRecipe}
-          />
+                onSaveClick={this.saveNewRecipe}
+                onChange={this.saveNewRecipeHandler}
+                newRecipe={this.props.newRecipe}
+            />
         );
     }
 }
@@ -23,19 +26,19 @@ saveNewRecipe = () => {
 NewRecipePage.propTypes = {
     actions: PropTypes.object.isRequired,
     newRecipe: PropTypes.object.isRequired
-  };
+};
 
 function mapStateToProps(state) {
     return {
-      newRecipe: state.newRecipe
+        newRecipe: state.newRecipe
     };
-  }
-  
-  function mapDispatchToProps(dispatch) {
+}
+
+function mapDispatchToProps(dispatch) {
     return {
-      actions: bindActionCreators(actions, dispatch)
+        actions: bindActionCreators(actions, dispatch)
     };
-  }
+}
 
 export default connect(
     mapStateToProps,
