@@ -1,1 +1,2 @@
 export const ADD_NEW_RECIPE = "ADD_NEW_RECIPE"
+export const ADD_ITEM_TO_LIST = "ADD_ITEM_TO_LIST"

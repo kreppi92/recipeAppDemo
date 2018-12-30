@@ -1,8 +1,17 @@
 export default {
-  newRecipe: {
-    description: '',
-    ingredients: '',
-    steps: '',
-    dateModified: null,
+  displayRecipes: {
+    displayRecipe: {
+      description: '',
+      ingredients: '',
+      steps: '',
+      dateModified: null,
+    },
+    newRecipeObject: {
+      description: [],
+      ingredients: [],
+      steps: [],
+      dateModified: null,
+    },
+    loadedRecipes: {},
   }
 };

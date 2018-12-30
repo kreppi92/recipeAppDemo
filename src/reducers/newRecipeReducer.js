@@ -1,13 +1,15 @@
-import {ADD_NEW_RECIPE} from '../constants/actionTypes';
+import {ADD_NEW_RECIPE, ADD_ITEM_TO_LIST} from '../constants/actionTypes';
 import initialState from './initialState';
+import objectAssign from 'object-assign';
 
 // IMPORTANT: Note that with Redux, state should NEVER be changed.
 // State is considered immutable. Instead,
 // create a copy of the state passed and set new values on the copy.
 // Note that I'm using Object.assign to create a copy of current state
 // and update values on the copy.
-export default function newRecipeReducer(state = initialState.newRecipe, action) {
+export default function newRecipeReducer(state = initialState.displayRecipes, action) {
   let newState;
+  newState = objectAssign({}, state)
 
   switch (action.type) {
     // case ADD_NEW_RECIPE:
@@ -18,16 +20,20 @@ export default function newRecipeReducer(state = initialState.newRecipe, action)
 
     case ADD_NEW_RECIPE:
     console.log("Calling newRecipeReducer.js")
-      newState = {...state}
-      newState[action.payload.fieldName] = action.payload.value;
+      newState.displayRecipe[action.payload.fieldName] = action.payload.value;
     //   newState.necessaryDataIsProvidedToCalculateSavings = necessaryDataIsProvidedToCalculateSavings(newState);
-      newState.dateModified = action.payload.dateModified;
-
+      newState.displayRecipe.dateModified = action.payload.dateModified;
     //   if (newState.necessaryDataIsProvidedToCalculateSavings) {
     //     newState.savings = calculateSavings(newState);
     //   }
-
       return newState;
+
+    case ADD_ITEM_TO_LIST:
+    console.log("Calling ADD_ITEM_TO_LIST")
+    newState.newRecipeObject[action.payload.fieldName].push(newState.displayRecipe[action.payload.fieldName])
+    newState.displayRecipe[action.payload.fieldName] = ""
+
+    return newState;
 
     default:
       return state;

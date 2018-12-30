@@ -1,31 +1,31 @@
 import React from 'react';
 import {func} from 'prop-types';
 import NewRecipeInput from './NewRecipeInput';
-import {newRecipe} from '../types';
+import {displayRecipes} from '../types';
 
-const NewRecipeForm = ({newRecipe, onSaveClick, onChange}) => (
+const NewRecipeForm = ({displayRecipes, onSaveClick, onChange}) => (
   <div>
     <h2>Add New Recipe</h2>
     <table>
       <tbody>
         <tr>
           <td><label htmlFor="description">Description</label></td>
-          <td><NewRecipeInput onChange={onChange} name="description" value={newRecipe.description}/>
+          <td><NewRecipeInput onChange={onChange} name="description" value={displayRecipes.displayRecipe.description} onSaveClick={onSaveClick}/>
           </td>
         </tr>
         <tr>
           <td><label htmlFor="ingredients">Ingredients</label></td>
-          <td><NewRecipeInput onChange={onChange} name="ingredients" value={newRecipe.ingredients}/>
+          <td><NewRecipeInput onChange={onChange} name="ingredients" value={displayRecipes.displayRecipe.ingredients} onSaveClick={onSaveClick}/>
           </td>
         </tr>
         <tr>
           <td><label htmlFor="steps">Steps</label></td>
-          <td><NewRecipeInput onChange={onChange} name="steps" value={newRecipe.steps}/>
+          <td><NewRecipeInput onChange={onChange} name="steps" value={displayRecipes.displayRecipe.steps} onSaveClick={onSaveClick}/>
           </td>
         </tr>
         <tr>
           <td><label>Date Modified</label></td>
-          <td>{newRecipe.dateModified}</td>
+          <td>{displayRecipes.displayRecipe.dateModified}</td>
         </tr>
       </tbody>
     </table>
@@ -35,9 +35,9 @@ const NewRecipeForm = ({newRecipe, onSaveClick, onChange}) => (
 );
 
 NewRecipeForm.propTypes = {
-  // onSaveClick: func.isRequired,
+  onSaveClick: func.isRequired,
   onChange: func.isRequired,
-  newRecipe: newRecipe.isRequired
+  displayRecipes: displayRecipes.isRequired
 };
 
 export default NewRecipeForm;
