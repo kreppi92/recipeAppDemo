@@ -17,11 +17,17 @@ export class NewRecipePage extends React.Component {
         this.props.actions.addItemToList(this.props.displayRecipes, e.target.name)
     }
 
+    deleteItemHandler = (e, index) => {
+        e.preventDefault()
+        this.props.actions.removeItemFromList(e.target.name, index)
+    }
+
     render() {
         return (
             <NewRecipeForm
                 onSaveClick={this.addItemToListHandler}
                 onChange={this.saveNewRecipeHandler}
+                onDelete={this.deleteItemHandler}
                 displayRecipes={this.props.displayRecipes}
             />
         );

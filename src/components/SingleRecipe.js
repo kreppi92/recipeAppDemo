@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 const SingleRecipe = ({ recipe }) => {
     return (
         <div>
-            <h2>{recipe.description}</h2>
-            <h5>Added {recipe.date}</h5>
+            <h2>{recipe.title}</h2>
+            <h5>Date modified {recipe.date}</h5>
+            <h4>Description: </h4>
+            <p>{recipe.description}</p>
             <h4>Ingredients: </h4>
             <ul>
                 {recipe.ingredients.map((ingredient, index) => (

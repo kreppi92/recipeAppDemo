@@ -33,25 +33,48 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
       return newState;
 
     case ADD_ITEM_TO_LIST:
-      newState = objectAssign({}, state, {
-        displayRecipe: {
-          ...state.displayRecipe,
-          [action.payload.fieldName]: ""
-        },
-        newRecipeObject: {
-          ...state.newRecipeObject,
-          [action.payload.fieldName]: [
-            ...state.newRecipeObject[action.payload.fieldName], 
-            state.displayRecipe[action.payload.fieldName]
-          ]
-        }
-      })
+      if (action.payload.fieldName === "description" || action.payload.fieldName === "title") {
+        newState = objectAssign({}, state, {
+          displayRecipe: {
+            ...state.displayRecipe,
+            [action.payload.fieldName]: ""
+          },
+          newRecipeObject: {
+            ...state.newRecipeObject,
+            [action.payload.fieldName]: [state.displayRecipe[action.payload.fieldName]]
+          }
+        })
+      } else {
+        newState = objectAssign({}, state, {
+          displayRecipe: {
+            ...state.displayRecipe,
+            [action.payload.fieldName]: ""
+          },
+          newRecipeObject: {
+            ...state.newRecipeObject,
+            [action.payload.fieldName]: [
+              ...state.newRecipeObject[action.payload.fieldName],
+              state.displayRecipe[action.payload.fieldName]
+            ]
+          }
+        })
+      }
       console.log("Calling ADD_ITEM_TO_LIST")
 
       return newState;
 
-      case REMOVE_ITEM_FROM_LIST:
-      console.log("calling REMOVE_ITEM_FROM_LIST")
+    case REMOVE_ITEM_FROM_LIST:
+      console.log("Calling REMOVE_ITEM_FROM_LIST")
+
+      newState = objectAssign({}, state, {
+        newRecipeObject: {
+          ...state.newRecipeObject,
+          [action.payload.fieldName]: [
+            ...state.newRecipeObject[action.payload.fieldName].slice(0, action.payload.index),
+            ...state.newRecipeObject[action.payload.fieldName].slice(action.payload.index + 1)
+          ]
+        }
+      })
       return newState;
 
     default:

@@ -4,14 +4,13 @@ import NewRecipeInput from './NewRecipeInput';
 import { displayRecipes } from '../types';
 import NewRecipeInputDisplay from './NewRecipeInputDisplay';
 
-const arrayOfElements = ["description", "ingredients", "steps"]
-
+const arrayOfElements = ["title", "description", "ingredients", "steps"]
 
 const uppercaseFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange }) => (
+const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete }) => (
   <div>
     <h2>Add New Recipe</h2>
     <table>
@@ -20,28 +19,20 @@ const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange }) => (
           return (
             <Fragment key={index}>
               <tr>
-                <td><label htmlFor={element}>{uppercaseFirstLetter(element)}</label></td>
+                <td><h4><label htmlFor={element}>{uppercaseFirstLetter(element)}</label></h4></td>
+              </tr>
+              <tr>
                 <td><NewRecipeInput onChange={onChange} name={element} value={displayRecipes.displayRecipe[element]} onSaveClick={onSaveClick} />
                 </td>
               </tr>
               <tr>
                 <td>
-                  <NewRecipeInputDisplay name={element} arrayOfItems={displayRecipes.newRecipeObject[element]} />
+                  <NewRecipeInputDisplay name={element} arrayOfItems={displayRecipes.newRecipeObject[element]} onDelete={onDelete} />
                 </td>
               </tr>
             </Fragment>
           )
         })}
-        {/* <tr>
-          <td><label htmlFor="ingredients">Ingredients</label></td>
-          <td><NewRecipeInput onChange={onChange} name="ingredients" value={displayRecipes.displayRecipe.ingredients} onSaveClick={onSaveClick}/>
-          </td>
-        </tr>
-        <tr>
-          <td><label htmlFor="steps">Steps</label></td>
-          <td><NewRecipeInput onChange={onChange} name="steps" value={displayRecipes.displayRecipe.steps} onSaveClick={onSaveClick}/>
-          </td>
-        </tr> */}
         <tr>
           <td><label>Date Modified</label></td>
           <td>{displayRecipes.displayRecipe.dateModified}</td>
