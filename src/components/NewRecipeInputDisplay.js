@@ -8,7 +8,7 @@ const NewRecipeInputDisplay = ({ name, arrayOfItems, onDelete }) => {
                 {arrayOfItems.map((item, index) =>
                     <Fragment key={index}>
                         <li>{item}{" "}
-                        <input type="submit" value="x" onClick={(e) => onDelete(e, index)} name={name}/>
+                        <input type="submit" value="X" onClick={(e) => onDelete(e, index)} name={name} className="cancelButton"/>
                         </li>
                     </Fragment>
                 )}
