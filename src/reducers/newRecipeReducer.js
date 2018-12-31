@@ -1,4 +1,4 @@
-import {ADD_NEW_RECIPE, ADD_ITEM_TO_LIST} from '../constants/actionTypes';
+import { ADD_NEW_RECIPE, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST } from '../constants/actionTypes';
 import initialState from './initialState';
 import objectAssign from 'object-assign';
 
@@ -9,7 +9,6 @@ import objectAssign from 'object-assign';
 // and update values on the copy.
 export default function newRecipeReducer(state = initialState.displayRecipes, action) {
   let newState;
-  newState = objectAssign({}, state)
 
   switch (action.type) {
     // case ADD_NEW_RECIPE:
@@ -19,21 +18,41 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
     //   return objectAssign({}, state, {dateModified: action.dateModified});
 
     case ADD_NEW_RECIPE:
-    console.log("Calling newRecipeReducer.js")
-      newState.displayRecipe[action.payload.fieldName] = action.payload.value;
-    //   newState.necessaryDataIsProvidedToCalculateSavings = necessaryDataIsProvidedToCalculateSavings(newState);
-      newState.displayRecipe.dateModified = action.payload.dateModified;
-    //   if (newState.necessaryDataIsProvidedToCalculateSavings) {
-    //     newState.savings = calculateSavings(newState);
-    //   }
+      newState = objectAssign({}, state, {
+        displayRecipe: {
+          ...state.displayRecipe,
+          [action.payload.fieldName]: action.payload.value,
+          dateModified: action.payload.dateModified
+        }
+      });
+      console.log("Calling newRecipeReducer.js")
+      //   newState.necessaryDataIsProvidedToCalculateSavings = necessaryDataIsProvidedToCalculateSavings(newState);
+      //   if (newState.necessaryDataIsProvidedToCalculateSavings) {
+      //     newState.savings = calculateSavings(newState);
+      //   }
       return newState;
 
     case ADD_ITEM_TO_LIST:
-    console.log("Calling ADD_ITEM_TO_LIST")
-    newState.newRecipeObject[action.payload.fieldName].push(newState.displayRecipe[action.payload.fieldName])
-    newState.displayRecipe[action.payload.fieldName] = ""
+      newState = objectAssign({}, state, {
+        displayRecipe: {
+          ...state.displayRecipe,
+          [action.payload.fieldName]: ""
+        },
+        newRecipeObject: {
+          ...state.newRecipeObject,
+          [action.payload.fieldName]: [
+            ...state.newRecipeObject[action.payload.fieldName], 
+            state.displayRecipe[action.payload.fieldName]
+          ]
+        }
+      })
+      console.log("Calling ADD_ITEM_TO_LIST")
 
-    return newState;
+      return newState;
+
+      case REMOVE_ITEM_FROM_LIST:
+      console.log("calling REMOVE_ITEM_FROM_LIST")
+      return newState;
 
     default:
       return state;

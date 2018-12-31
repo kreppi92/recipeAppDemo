@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const NewRecipeInput = ({name, value, placeholder, onChange, onSaveClick}) => {
   return (
-    <form>
+    <form onSubmit={onSaveClick} name={name}>
     <input
       className="small"
       name={name}
@@ -11,7 +11,7 @@ const NewRecipeInput = ({name, value, placeholder, onChange, onSaveClick}) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}/>
-      <input type="submit" value="ADD" onClick={onSaveClick}/>
+      <input type="submit" value="ADD"/>
     </form>
   );
 };

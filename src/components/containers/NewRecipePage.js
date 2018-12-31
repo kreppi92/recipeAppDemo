@@ -14,7 +14,7 @@ export class NewRecipePage extends React.Component {
 
     addItemToListHandler = e => {
         e.preventDefault()
-        this.props.actions.addItemToList(this.props.displayRecipes)
+        this.props.actions.addItemToList(this.props.displayRecipes, e.target.name)
     }
 
     render() {

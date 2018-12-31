@@ -14,17 +14,17 @@ export function saveNewRecipe(settings, fieldName, value) {
     };
 }
 
-export function addItemToList(settings, fieldName, value) {
-    console.log("calling action creator addItemToList")
+export function addItemToList(settings, fieldName) {
     return function (dispatch) {
         // thunks allow for pre-processing actions, calling apis, and dispatching multiple actions
         // in this case at this point we could call a service that would persist the fuel savings
         return dispatch({
           type: types.ADD_ITEM_TO_LIST,
-          dateModified: getFormattedDateTime(),
-          settings,
-          fieldName,
-          value
+          payload: {
+            dateModified: getFormattedDateTime(),
+            settings,
+            fieldName
+          }
         });
       };
 }
