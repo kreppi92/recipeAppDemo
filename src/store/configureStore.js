@@ -5,9 +5,13 @@ import createHistory from 'history/createBrowserHistory';
 // 'routerMiddleware': the new way of storing route changes with redux middleware since rrV4.
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import rootReducer from '../reducers';
+import firstState from '../reducers/initialState.js'
+import { loadState, saveState } from '../reducers/initialState.js'
 
 export const history = createHistory();
 const connectRouterHistory = connectRouter(history);
+
+const persistedState = loadState()
 
 function configureStoreProd(initialState) {
   const reactRouterMiddleware = routerMiddleware(history);
@@ -20,11 +24,19 @@ function configureStoreProd(initialState) {
     reactRouterMiddleware,
   ];
 
-  return createStore(
+  const store = createStore(
     connectRouterHistory(rootReducer), 
-    initialState, 
+    // initialState, 
+    persistedState,
     compose(applyMiddleware(...middlewares))
   );
+
+  store.subscribe( () => {
+    saveState({
+      displayRecipes: store.getState().displayRecipes
+    })
+  })
+  return store
 }
 
 function configureStoreDev(initialState) {
@@ -44,7 +56,8 @@ function configureStoreDev(initialState) {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
   const store = createStore(
     connectRouterHistory(rootReducer),  
-    initialState, 
+    // initialState, 
+    persistedState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
 
@@ -55,6 +68,16 @@ function configureStoreDev(initialState) {
       store.replaceReducer(connectRouterHistory(nextRootReducer));
     });
   }
+
+  store.subscribe( () => {
+    let persistState = store.getState().displayRecipes
+    saveState(
+     {displayRecipes: {
+       ...firstState.displayRecipes,
+      loadedRecipes: persistState.loadedRecipes
+     }}
+    )
+  })
 
   return store;
 }

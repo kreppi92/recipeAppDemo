@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,7 +8,6 @@ import NewRecipeForm from '../NewRecipeForm';
 export class NewRecipePage extends React.Component {
 
     saveNewRecipeHandler = e => {
-        console.log("Calling saveNewRecipe function within NewRecipePage.js")
         this.props.actions.saveNewRecipe(this.props.displayRecipes, e.target.name, e.target.value);
     }
 
@@ -22,14 +21,24 @@ export class NewRecipePage extends React.Component {
         this.props.actions.removeItemFromList(e.target.name, index)
     }
 
+    saveRecipeHandler = e => {
+        e.preventDefault()
+        this.props.actions.addRecipeToRecipeArray()
+    }
+
     render() {
         return (
-            <NewRecipeForm
-                onSaveClick={this.addItemToListHandler}
-                onChange={this.saveNewRecipeHandler}
-                onDelete={this.deleteItemHandler}
-                displayRecipes={this.props.displayRecipes}
-            />
+            <Fragment>
+                <h1>NEW RECIPE</h1>
+                <NewRecipeForm
+                    onSaveClick={this.addItemToListHandler}
+                    onChange={this.saveNewRecipeHandler}
+                    onDelete={this.deleteItemHandler}
+                    displayRecipes={this.props.displayRecipes}
+                    onSaveRecipe={this.saveRecipeHandler}
+                />
+            </Fragment>
+
         );
     }
 }

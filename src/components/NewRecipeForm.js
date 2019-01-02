@@ -4,15 +4,15 @@ import NewRecipeInput from './NewRecipeInput';
 import { displayRecipes } from '../types';
 import NewRecipeInputDisplay from './NewRecipeInputDisplay';
 
-const arrayOfElements = ["title", "description", "ingredients", "steps"]
+const arrayOfElements = ["description", "ingredients", "steps"]
 
 const uppercaseFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete }) => (
+const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete, onSaveRecipe }) => (
   <div>
-    <h2>Add New Recipe</h2>
+    <h2>Recipe Creation Form</h2>
     <table>
       <tbody>
         {arrayOfElements.map((element, index) => {
@@ -41,12 +41,14 @@ const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete }) => (
     </table>
 
     <hr />
+    <input type="submit" value="SAVE" onClick={onSaveRecipe}/>
   </div>
 );
 
 NewRecipeForm.propTypes = {
   onSaveClick: func.isRequired,
   onChange: func.isRequired,
+  onSaveRecipe: func.isRequired,
   displayRecipes: displayRecipes.isRequired
 };
 

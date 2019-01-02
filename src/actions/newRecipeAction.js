@@ -2,9 +2,8 @@ import * as types from '../constants/actionTypes';
 import { getFormattedDateTime } from '../utils/dates';
 
 export function saveNewRecipe(settings, fieldName, value) {
-    console.log("calling newRecipeAction.js")
     return {
-        type: types.ADD_NEW_RECIPE,
+        type: types.CONTROL_INPUT,
         payload: {
             dateModified: getFormattedDateTime(),
             settings,
@@ -35,6 +34,38 @@ export function removeItemFromList(fieldName, index) {
             type: types.REMOVE_ITEM_FROM_LIST,
             payload: {
                 fieldName,
+                index
+            }
+        })
+    }
+}
+
+export function addRecipeToRecipeArray() {
+    return function (dispatch) {
+        return dispatch({
+            type: types.ADD_RECIPE,
+            payload: {
+            }
+        })
+    }
+}
+
+export function loadRecipes(arrayOfRecipes) {
+    return function (dispatch) {
+        return dispatch({
+            type: types.LOAD_RECIPES,
+            payload: {
+                arrayOfRecipes
+            }
+        })
+    }
+}
+
+export function deleteRecipe(index) {
+    return function (dispatch) {
+        return dispatch({
+            type: types.DELETE_RECIPE,
+            payload: {
                 index
             }
         })

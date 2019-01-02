@@ -1,4 +1,4 @@
-import { ADD_NEW_RECIPE, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST } from '../constants/actionTypes';
+import { CONTROL_INPUT, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST, ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE } from '../constants/actionTypes';
 import initialState from './initialState';
 import objectAssign from 'object-assign';
 
@@ -17,7 +17,7 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
     //   // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
     //   return objectAssign({}, state, {dateModified: action.dateModified});
 
-    case ADD_NEW_RECIPE:
+    case CONTROL_INPUT:
       newState = objectAssign({}, state, {
         displayRecipe: {
           ...state.displayRecipe,
@@ -25,7 +25,6 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
           dateModified: action.payload.dateModified
         }
       });
-      console.log("Calling newRecipeReducer.js")
       //   newState.necessaryDataIsProvidedToCalculateSavings = necessaryDataIsProvidedToCalculateSavings(newState);
       //   if (newState.necessaryDataIsProvidedToCalculateSavings) {
       //     newState.savings = calculateSavings(newState);
@@ -37,34 +36,36 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
         newState = objectAssign({}, state, {
           displayRecipe: {
             ...state.displayRecipe,
-            [action.payload.fieldName]: ""
+            [action.payload.fieldName]: "",
+            dateModified: action.payload.dateModified
           },
           newRecipeObject: {
             ...state.newRecipeObject,
-            [action.payload.fieldName]: [state.displayRecipe[action.payload.fieldName]]
+            [action.payload.fieldName]: [state.displayRecipe[action.payload.fieldName]],
+            dateModified: action.payload.dateModified
           }
         })
       } else {
         newState = objectAssign({}, state, {
           displayRecipe: {
             ...state.displayRecipe,
-            [action.payload.fieldName]: ""
+            [action.payload.fieldName]: "",
+            dateModified: action.payload.dateModified
           },
           newRecipeObject: {
             ...state.newRecipeObject,
             [action.payload.fieldName]: [
               ...state.newRecipeObject[action.payload.fieldName],
-              state.displayRecipe[action.payload.fieldName]
-            ]
+              state.displayRecipe[action.payload.fieldName],
+            ],
+            dateModified: action.payload.dateModified
           }
         })
       }
-      console.log("Calling ADD_ITEM_TO_LIST")
 
       return newState;
 
     case REMOVE_ITEM_FROM_LIST:
-      console.log("Calling REMOVE_ITEM_FROM_LIST")
 
       newState = objectAssign({}, state, {
         newRecipeObject: {
@@ -76,6 +77,42 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
         }
       })
       return newState;
+
+    case ADD_RECIPE:
+      newState = objectAssign({}, state, {
+        newRecipeObject: {
+          description: [],
+          ingredients: [],
+          steps: []
+        },
+        loadedRecipes: [
+          ...state.loadedRecipes,
+          { ...state.newRecipeObject }
+        ]
+      }
+      )
+      return newState;
+
+    case LOAD_RECIPES:
+      newState = objectAssign({}, state, {
+        loadedRecipes: [
+          ...action.payload.arrayOfRecipes,
+        ]
+      }
+      )
+
+      return newState;
+
+    case DELETE_RECIPE:
+      newState = objectAssign({}, state, {
+        loadedRecipes: [
+          ...state.loadedRecipes.slice(0, action.payload.index),
+          ...state.loadedRecipes.slice(action.payload.index + 1)
+        ]
+      }
+      )
+
+      return newState
 
     default:
       return state;
