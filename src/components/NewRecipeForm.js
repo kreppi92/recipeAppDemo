@@ -3,6 +3,7 @@ import { func } from 'prop-types';
 import NewRecipeInput from './NewRecipeInput';
 import { displayRecipes } from '../types';
 import NewRecipeInputDisplay from './NewRecipeInputDisplay';
+import { Link } from 'react-router-dom';
 
 const arrayOfElements = ["description", "ingredients", "steps"]
 
@@ -10,7 +11,7 @@ const uppercaseFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete, onSaveRecipe }) => (
+const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete, onSaveRecipe, clearRecipe }) => (
   <div>
     <h2>Recipe Creation Form</h2>
     <table>
@@ -35,13 +36,16 @@ const NewRecipeForm = ({ displayRecipes, onSaveClick, onChange, onDelete, onSave
         })}
         <tr>
           <td><label>Date Modified</label></td>
-          <td>{displayRecipes.displayRecipe.dateModified}</td>
+          <td>{displayRecipes.newRecipeObject.dateModified}</td>
         </tr>
       </tbody>
     </table>
 
     <hr />
+    <Link to="/">
     <input type="submit" value="SAVE" onClick={onSaveRecipe}/>
+    </Link>
+    <input type="submit" value="CLEAR" onClick={clearRecipe}/>
   </div>
 );
 
@@ -49,6 +53,7 @@ NewRecipeForm.propTypes = {
   onSaveClick: func.isRequired,
   onChange: func.isRequired,
   onSaveRecipe: func.isRequired,
+  clearRecipe: func.isRequired,
   displayRecipes: displayRecipes.isRequired
 };
 

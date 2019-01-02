@@ -38,13 +38,24 @@ export default {
       {
         description: ["French Canadian Maple Rolls (Pets-de-Soeur)"],
         dateModified: "1/1 21:46:14",
-        ingredients: ["200ml Milk","400g Pastry Dough","200g Brown Sugar", "200ml Maple Syrup", "50ml Cream"],
+        ingredients: ["400g Pastry Dough","200g Brown Sugar", "200ml Maple Syrup", "100ml Cream"],
         steps: [
-            "Combine milk, cream, maple syrup and brown sugar in saucepan.",
+            "Combine cream, maple syrup and brown sugar in saucepan.",
             "Roll pastry dough and slice into one inch pinwheels",
             "Arrange pinwheels in casserole dish",
             "Pour the maple sauce over the pinwheels",
             "Bake at 400C for 25 minutes and serve"
+        ]
+      },
+      {
+        description: ["Poutine"],
+        dateModified: "1/1 21:46:14",
+        ingredients: ["French Fries", "Cheese Curds", "Gravy"],
+        steps: [
+            "Deep fry french fries",
+            "Place french fries in bowl",
+            "Top fries with cheese curds",
+            "Pour gravy over fries and cheese curds and serve",
         ]
       }
     ],

@@ -1,4 +1,4 @@
-import { CONTROL_INPUT, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST, ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE } from '../constants/actionTypes';
+import { CONTROL_INPUT, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST, ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE, EDIT_RECIPE, CLEAR_RECIPE } from '../constants/actionTypes';
 import initialState from './initialState';
 import objectAssign from 'object-assign';
 
@@ -113,6 +113,29 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
       )
 
       return newState
+
+    case EDIT_RECIPE:
+      console.log("Calling edit recipe")
+      console.log(state.loadedRecipes[action.payload.index])
+      newState = objectAssign({}, state, {
+        newRecipeObject: {
+          ...state.loadedRecipes[action.payload.index]
+        },
+      },
+      )
+
+    case CLEAR_RECIPE:
+      newState = objectAssign({}, state, {
+        newRecipeObject: {
+          description: [],
+          ingredients: [],
+          steps: []
+        }
+      }
+      )
+
+      return newState
+
 
     default:
       return state;

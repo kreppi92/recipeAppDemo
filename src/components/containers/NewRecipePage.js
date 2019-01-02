@@ -22,8 +22,12 @@ export class NewRecipePage extends React.Component {
     }
 
     saveRecipeHandler = e => {
-        e.preventDefault()
         this.props.actions.addRecipeToRecipeArray()
+    }
+
+    clearRecipeHandler = e => {
+        e.preventDefault()
+        this.props.actions.clearRecipe()
     }
 
     render() {
@@ -36,6 +40,7 @@ export class NewRecipePage extends React.Component {
                     onDelete={this.deleteItemHandler}
                     displayRecipes={this.props.displayRecipes}
                     onSaveRecipe={this.saveRecipeHandler}
+                    clearRecipe={this.clearRecipeHandler}
                 />
             </Fragment>
 

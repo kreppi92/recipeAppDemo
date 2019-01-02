@@ -12,18 +12,28 @@ export class AllRecipes extends React.Component {
     this.props.actions.deleteRecipe(index)
   }
 
+  editRecipeHandler = (e, index) => {
+    this.props.actions.editRecipe(index)
+  }
+
   render() {
     return (
       <div>
         <h1>RECIPE INDEX</h1>
         {this.props.displayRecipes.loadedRecipes.length > 0 ?
             this.props.displayRecipes.loadedRecipes.slice(0).reverse().map((singleRecipe, index) =>
-              <SingleRecipe recipe={singleRecipe} key={index} recipeIndex={index} deleteRecipe={this.deleteRecipeHandler}/>
+            
+              <SingleRecipe 
+              recipe={singleRecipe} 
+              key={index} 
+              recipeIndex={index} 
+              deleteRecipe={this.deleteRecipeHandler}
+              editRecipe={this.editRecipeHandler}/>
             )
       :
       (<Fragment>
         <p>{"NO RECIPES AVAILABLE"}</p>
-        <p>{"Would you like to reset your local storage?"}</p>
+        <p>{"Consider deleting your local storage to see the initial state."}</p>
       </Fragment>)}
 
       </div>

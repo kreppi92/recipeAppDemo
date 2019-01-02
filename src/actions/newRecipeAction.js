@@ -71,3 +71,24 @@ export function deleteRecipe(index) {
         })
     }
 }
+
+export function editRecipe(index) {
+    return function (dispatch) {
+        return dispatch({
+            type: types.EDIT_RECIPE,
+            payload: {
+                index
+            }
+        })
+    }
+}
+
+export function clearRecipe() {
+    return function (dispatch) {
+        return dispatch({
+            type: types.CLEAR_RECIPE,
+            payload: {
+            }
+        })
+    }
+}
