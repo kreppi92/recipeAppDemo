@@ -30,6 +30,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "3.8.1",
+    "@material-ui/icons": "3.0.1",
     "connected-react-router": "4.4.1",
     "object-assign": "4.1.1",
     "react": "16.4.2",

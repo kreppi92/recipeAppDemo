@@ -115,22 +115,27 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
       return newState
 
     case EDIT_RECIPE:
-      console.log("Calling edit recipe")
-      console.log(state.loadedRecipes[action.payload.index])
       newState = objectAssign({}, state, {
         newRecipeObject: {
           ...state.loadedRecipes[action.payload.index]
         },
+        loadedRecipes: [
+          ...state.loadedRecipes.slice(0, action.payload.index),
+          ...state.loadedRecipes.slice(action.payload.index + 1)
+        ]
       },
       )
+
+      return newState
 
     case CLEAR_RECIPE:
       newState = objectAssign({}, state, {
         newRecipeObject: {
           description: [],
           ingredients: [],
-          steps: []
-        }
+          steps: [],
+          dateModified: ""
+        },
       }
       )
 

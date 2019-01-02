@@ -11,14 +11,14 @@ export class NewRecipePage extends React.Component {
         this.props.actions.saveNewRecipe(this.props.displayRecipes, e.target.name, e.target.value);
     }
 
-    addItemToListHandler = e => {
+    addItemToListHandler = (e, name) => {
         e.preventDefault()
-        this.props.actions.addItemToList(this.props.displayRecipes, e.target.name)
+        this.props.actions.addItemToList(this.props.displayRecipes, name)
     }
 
-    deleteItemHandler = (e, index) => {
+    deleteItemHandler = (e, name, index) => {
         e.preventDefault()
-        this.props.actions.removeItemFromList(e.target.name, index)
+        this.props.actions.removeItemFromList(name, index)
     }
 
     saveRecipeHandler = e => {

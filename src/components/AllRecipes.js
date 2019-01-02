@@ -7,6 +7,7 @@ import * as actions from '../actions/newRecipeAction';
 
 export class AllRecipes extends React.Component {
 
+
   deleteRecipeHandler = (e, index) => {
     e.preventDefault()
     this.props.actions.deleteRecipe(index)
@@ -18,10 +19,10 @@ export class AllRecipes extends React.Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <h1>RECIPE INDEX</h1>
         {this.props.displayRecipes.loadedRecipes.length > 0 ?
-            this.props.displayRecipes.loadedRecipes.slice(0).reverse().map((singleRecipe, index) =>
+            this.props.displayRecipes.loadedRecipes.map((singleRecipe, index) =>
             
               <SingleRecipe 
               recipe={singleRecipe} 
@@ -35,8 +36,7 @@ export class AllRecipes extends React.Component {
         <p>{"NO RECIPES AVAILABLE"}</p>
         <p>{"Consider deleting your local storage to see the initial state."}</p>
       </Fragment>)}
-
-      </div>
+    </Fragment>
     );
   };
 }

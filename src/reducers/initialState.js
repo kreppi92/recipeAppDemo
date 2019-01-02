@@ -36,7 +36,7 @@ export default {
     },
     loadedRecipes: [
       {
-        description: ["French Canadian Maple Rolls (Pets-de-Soeur)"],
+        description: ["Canadian Maple Rolls (Pets-de-Soeur)"],
         dateModified: "1/1 21:46:14",
         ingredients: ["400g Pastry Dough","200g Brown Sugar", "200ml Maple Syrup", "100ml Cream"],
         steps: [
@@ -48,7 +48,7 @@ export default {
         ]
       },
       {
-        description: ["Poutine"],
+        description: ["Poutine (Cheesy Gravy Fries)"],
         dateModified: "1/1 21:46:14",
         ingredients: ["French Fries", "Cheese Curds", "Gravy"],
         steps: [

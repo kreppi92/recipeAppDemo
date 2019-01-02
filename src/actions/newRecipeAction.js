@@ -83,11 +83,13 @@ export function editRecipe(index) {
     }
 }
 
-export function clearRecipe() {
+export function clearRecipe(index) {
+
     return function (dispatch) {
         return dispatch({
             type: types.CLEAR_RECIPE,
             payload: {
+                index
             }
         })
     }

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+import TextField from '@material-ui/core/TextField';
 
-const NewRecipeInput = ({name, value, placeholder, onChange, onSaveClick}) => {
+const NewRecipeInput = ({ name, value, placeholder, onChange, onSaveClick, uppercase }) => {
   return (
-    <form onSubmit={onSaveClick} name={name}>
-    <input
-      className="small"
-      name={name}
-      type="text"
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}/>
-      <input type="submit" value="ADD"/>
+    <form name={name} onSubmit={(e) => onSaveClick(e, name)}>
+      <TextField
+        className="small"
+        label={uppercase(name)}
+        name={name}
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange} />
+      <IconButton aria-label="Delete" color="secondary">
+        <AddIcon onClick={(e) => onSaveClick(e, name)} />
+      </IconButton>
     </form>
   );
 };

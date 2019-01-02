@@ -16,7 +16,7 @@ class App extends React.Component {
                 <div>
                     <NavLink exact to="/" activeStyle={activeStyle}>All Recipes</NavLink>
                     {" | "}
-                    <NavLink exact to="/NewRecipe">New Recipe</NavLink>
+                    <NavLink exact to="/NewRecipe" activeStyle={activeStyle} >New Recipe</NavLink>
                 </div>
                 <Switch>
                     <Route exact path="/" component={AllRecipes} />
