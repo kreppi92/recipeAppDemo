@@ -1,4 +1,4 @@
-import { CONTROL_INPUT, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST, ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE, EDIT_RECIPE, CLEAR_RECIPE } from '../constants/actionTypes';
+import { CONTROL_INPUT, ADD_ITEM_TO_LIST, REMOVE_ITEM_FROM_LIST, ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE, EDIT_RECIPE, CLEAR_RECIPE, EXPAND_VIEW } from '../constants/actionTypes';
 import initialState from './initialState';
 import objectAssign from 'object-assign';
 
@@ -32,7 +32,7 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
       return newState;
 
     case ADD_ITEM_TO_LIST:
-      if (action.payload.fieldName === "description" || action.payload.fieldName === "title") {
+      if (action.payload.fieldName === "description" || action.payload.fieldName === "image") {
         newState = objectAssign({}, state, {
           displayRecipe: {
             ...state.displayRecipe,
@@ -83,7 +83,8 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
         newRecipeObject: {
           description: [],
           ingredients: [],
-          steps: []
+          steps: [],
+          image: [],
         },
         loadedRecipes: [
           ...state.loadedRecipes,
@@ -134,10 +135,27 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
           description: [],
           ingredients: [],
           steps: [],
-          dateModified: ""
+          image: [],
+          dateModified: "",
         },
       }
       )
+
+      return newState
+
+      case EXPAND_VIEW:
+      if (action.payload.index === state.expandedView) {
+        newState = objectAssign({}, state, {
+          expandedView: ""
+        }
+        )
+      } else {
+        newState = objectAssign({}, state, {
+          expandedView: action.payload.index
+        }
+        )
+      }
+
 
       return newState
 

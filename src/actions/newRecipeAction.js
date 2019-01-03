@@ -94,3 +94,15 @@ export function clearRecipe(index) {
         })
     }
 }
+
+export function expandView(index) {
+
+    return function (dispatch) {
+        return dispatch({
+            type: types.EXPAND_VIEW,
+            payload: {
+                index
+            }
+        })
+    }
+}

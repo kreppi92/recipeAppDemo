@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/newRecipeAction';
 import NewRecipeForm from '../NewRecipeForm';
+import Grid from '@material-ui/core/Grid'
 
 export class NewRecipePage extends React.Component {
 
@@ -21,7 +22,7 @@ export class NewRecipePage extends React.Component {
         this.props.actions.removeItemFromList(name, index)
     }
 
-    saveRecipeHandler = e => {
+    saveRecipeHandler = () => {
         this.props.actions.addRecipeToRecipeArray()
     }
 
@@ -32,18 +33,19 @@ export class NewRecipePage extends React.Component {
 
     render() {
         return (
-            <Fragment>
-                <h1>NEW RECIPE</h1>
-                <NewRecipeForm
-                    onSaveClick={this.addItemToListHandler}
-                    onChange={this.saveNewRecipeHandler}
-                    onDelete={this.deleteItemHandler}
-                    displayRecipes={this.props.displayRecipes}
-                    onSaveRecipe={this.saveRecipeHandler}
-                    clearRecipe={this.clearRecipeHandler}
-                />
-            </Fragment>
-
+            <Grid container spacing={16}>
+                <Grid item xs={12} sm={12}>
+                    <h1>NEW RECIPE</h1>
+                    <NewRecipeForm
+                        onSaveClick={this.addItemToListHandler}
+                        onChange={this.saveNewRecipeHandler}
+                        onDelete={this.deleteItemHandler}
+                        displayRecipes={this.props.displayRecipes}
+                        onSaveRecipe={this.saveRecipeHandler}
+                        clearRecipe={this.clearRecipeHandler}
+                    />
+                </Grid>
+            </Grid>
         );
     }
 }

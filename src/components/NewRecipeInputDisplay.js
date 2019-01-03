@@ -28,11 +28,12 @@ const NewRecipeInputDisplay = ({ name, arrayOfItems, onDelete }) => {
     )
 }
 
-const { array, func } = PropTypes;
+const { array, func, string } = PropTypes;
 
 NewRecipeInputDisplay.propTypes = {
     arrayOfItems: array.isRequired,
-    onDelete: func.isRequired
+    onDelete: func.isRequired,
+    name: string.isRequired
 };
 
 export default NewRecipeInputDisplay
