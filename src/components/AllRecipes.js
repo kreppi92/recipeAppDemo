@@ -40,6 +40,7 @@ export class AllRecipes extends React.Component {
                 editRecipe={this.editRecipeHandler}
                 expandedView={this.props.displayRecipes.expandedView}
                 handleExpandView={this.expandViewHandler}
+                classes={this.props.classes}
                 />
             </Grid>
           )

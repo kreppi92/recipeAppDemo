@@ -43,12 +43,7 @@ const styles = theme => ({
     },
 });
 
-class SingleRecipe extends React.Component {
-    state = { expanded: false };
-
-    render() {
-        const { classes, recipe, recipeIndex, deleteRecipe, editRecipe, expandedView, handleExpandView } = this.props;
-
+const SingleRecipe = ({ classes, recipe, recipeIndex, deleteRecipe, editRecipe, expandedView, handleExpandView }) => {
         return (
             <div>
                 <Card className={classes.card}>
@@ -119,8 +114,7 @@ class SingleRecipe extends React.Component {
                     </Collapse>
                 </Card>
             </div>
-        );
-    }
+        )
 }
 
 const { object, func, number } = PropTypes;
