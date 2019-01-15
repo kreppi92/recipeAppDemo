@@ -5,15 +5,14 @@ import createHistory from 'history/createBrowserHistory';
 // 'routerMiddleware': the new way of storing route changes with redux middleware since rrV4.
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import rootReducer from '../reducers';
-import firstState from '../reducers/initialState.js'
-import { loadState, saveState } from '../reducers/initialState.js'
+import firstState, { loadState, saveState } from '../reducers/initialState.js'
 
 export const history = createHistory();
 const connectRouterHistory = connectRouter(history);
 
 const persistedState = loadState()
 
-function configureStoreProd(initialState) {
+function configureStoreProd() {
   const reactRouterMiddleware = routerMiddleware(history);
   const middlewares = [
     // Add other middleware on this line...
@@ -39,7 +38,7 @@ function configureStoreProd(initialState) {
   return store
 }
 
-function configureStoreDev(initialState) {
+function configureStoreDev() {
   const reactRouterMiddleware = routerMiddleware(history);
   const middlewares = [
     // Add other middleware on this line...

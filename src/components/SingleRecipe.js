@@ -117,14 +117,16 @@ const SingleRecipe = ({ classes, recipe, recipeIndex, deleteRecipe, editRecipe, 
         )
 }
 
-const { object, func, number } = PropTypes;
+const { object, func, number, string } = PropTypes;
 
 SingleRecipe.propTypes = {
     classes: object.isRequired,
     recipe: object.isRequired,
     recipeIndex: number.isRequired,
     deleteRecipe: func.isRequired,
-    editRecipe: func.isRequired
+    editRecipe: func.isRequired,
+    expandedView: string.isRequired,
+    handleExpandView: func.isRequired
 };
 
 export default withStyles(styles)(SingleRecipe);

@@ -56,7 +56,8 @@ export class AllRecipes extends React.Component {
 
 AllRecipes.propTypes = {
   actions: PropTypes.object.isRequired,
-  displayRecipes: PropTypes.object.isRequired
+  displayRecipes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
