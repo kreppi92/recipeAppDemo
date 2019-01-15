@@ -7,15 +7,11 @@ import objectAssign from 'object-assign';
 // create a copy of the state passed and set new values on the copy.
 // Note that I'm using Object.assign to create a copy of current state
 // and update values on the copy.
+
 export default function newRecipeReducer(state = initialState.displayRecipes, action) {
   let newState;
 
   switch (action.type) {
-    // case ADD_NEW_RECIPE:
-    // console.log("calling reducer")
-    //   // For this example, just simulating a save by changing date modified.
-    //   // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
-    //   return objectAssign({}, state, {dateModified: action.dateModified});
 
     case CONTROL_INPUT:
       newState = objectAssign({}, state, {
@@ -25,10 +21,6 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
           dateModified: action.payload.dateModified
         }
       });
-      //   newState.necessaryDataIsProvidedToCalculateSavings = necessaryDataIsProvidedToCalculateSavings(newState);
-      //   if (newState.necessaryDataIsProvidedToCalculateSavings) {
-      //     newState.savings = calculateSavings(newState);
-      //   }
       return newState;
 
     case ADD_ITEM_TO_LIST:
@@ -88,7 +80,10 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
         },
         loadedRecipes: [
           ...state.loadedRecipes,
-          { ...state.newRecipeObject }
+          {
+            ...state.newRecipeObject,
+            id: action.payload.id
+          }
         ]
       }
       )
@@ -143,7 +138,7 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
 
       return newState
 
-      case EXPAND_VIEW:
+    case EXPAND_VIEW:
       if (action.payload.index === state.expandedView) {
         newState = objectAssign({}, state, {
           expandedView: ""
@@ -156,9 +151,7 @@ export default function newRecipeReducer(state = initialState.displayRecipes, ac
         )
       }
 
-
       return newState
-
 
     default:
       return state;

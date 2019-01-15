@@ -37,6 +37,7 @@ export default {
     },
     loadedRecipes: [
       {
+        id: '1',
         description: ["Canadian Maple Rolls (Pets-de-Soeur)"],
         dateModified: "1/1 21:46:14",
         image: ["http://s3-ca-central-1.amazonaws.com/staging-praticopratiques/app/uploads/sites/2/2018/12/14105502/pets-de-soeur-a-l-erable.jpg"],
@@ -50,6 +51,7 @@ export default {
         ]
       },
       {
+        id: '2',
         description: ["Poutine (Cheesy Gravy Fries)"],
         dateModified: "1/1 21:46:14",
         image: ["https://www.macleans.ca/wp-content/uploads/2017/05/MAC06_CANADA_PROJECT_RICHLER_POST01.jpg"],

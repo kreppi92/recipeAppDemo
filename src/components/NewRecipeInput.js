@@ -23,7 +23,7 @@ const NewRecipeInput = ({ name, value, placeholder, onChange, onSaveClick, upper
   );
 };
 
-const { string, func, number, oneOfType } = PropTypes;
+const { string, func, number, oneOfType, array } = PropTypes;
 
 NewRecipeInput.propTypes = {
   name: string.isRequired,
@@ -33,7 +33,8 @@ NewRecipeInput.propTypes = {
   placeholder: string.isRequired,
   value: oneOfType([
     string,
-    number
+    number,
+    array
   ])
 };
 

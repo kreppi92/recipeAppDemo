@@ -31,10 +31,10 @@ export class AllRecipes extends React.Component {
         </Grid>
         {this.props.displayRecipes.loadedRecipes.length > 0 ?
           this.props.displayRecipes.loadedRecipes.map((singleRecipe, index) =>
-            <Grid item xs={12} sm={6} key={index}>
+            <Grid item xs={12} sm={6} key={singleRecipe.id}>
               <SingleRecipe
                 recipe={singleRecipe}
-                key={index}
+                key={singleRecipe.id}
                 recipeIndex={index}
                 deleteRecipe={this.deleteRecipeHandler}
                 editRecipe={this.editRecipeHandler}
@@ -57,7 +57,7 @@ export class AllRecipes extends React.Component {
 AllRecipes.propTypes = {
   actions: PropTypes.object.isRequired,
   displayRecipes: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object
 };
 
 function mapStateToProps(state) {
