@@ -25,7 +25,7 @@ export class AllRecipes extends React.Component {
 
   render() {
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={16} xs={12}>
         <Grid item xs={12}>
           <h1>RECIPE INDEX</h1>
         </Grid>
