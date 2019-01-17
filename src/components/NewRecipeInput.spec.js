@@ -1,9 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createShallow, getClasses } from '@material-ui/core/test-utils';
 import NewRecipeInput from './NewRecipeInput';
 
 describe('<NewRecipeInput />', () => {
-  it('should be an input element', () => {
+  let shallow;
+
+  beforeAll(()=> {
+    shallow=createShallow();
+    classes= getClasses(<NewRecipeInput/>);
+  });
+
+  it('should be a form element', () => {
     const props = {
       placeholder: "description",
       onChange: jest.fn(),
@@ -11,10 +18,13 @@ describe('<NewRecipeInput />', () => {
       value: "this is a test",
       onSaveClick: jest.fn(),
       uppercase: jest.fn(),
+      label: "description"
     };
 
     const wrapper = shallow(<NewRecipeInput {...props} />);
-    const inputType = wrapper.type();
+    const inputType = wrapper.find('TextField').checkType();
+
+    console.log(wrapper.find('TextField').checkType());
 
     expect(inputType).toEqual('form');
   });
@@ -27,14 +37,15 @@ describe('<NewRecipeInput />', () => {
         value: "1",
         onSaveClick: jest.fn(),
         uppercase: jest.fn(),
+        label: "description"
     };
 
     const wrapper = shallow(<NewRecipeInput {...props} />);
-    const changeEvent = {target: {value: "11"}};
+    const changeEvent = {target: {value: "2"}};
 
-    expect(props.onChange).not.toBeCalled();
-    wrapper.simulate('change', changeEvent);
-    expect(props.onChange).toBeCalledWith(changeEvent);
+    expect(wrapper.find('TextField').onChange).not.toBeCalled();
+    wrapper.find('TextField').props().simulate('change', changeEvent);
+    expect(wrapper.find('TextField').onChange).toBeCalledWith(changeEvent);
   });
 
   // Example of testing the value of a prop
@@ -46,10 +57,11 @@ describe('<NewRecipeInput />', () => {
         value: ["this is a test"],
         onSaveClick: jest.fn(),
         uppercase: jest.fn(),
+        label: "description"
     };
 
     const wrapper = shallow(<NewRecipeInput {...props} />);
-    const placeholder = wrapper.find('input').prop('placeholder');
+    const placeholder = wrapper.find('TextField').dive().find('input').prop('placeholder');
 
     expect(placeholder).toEqual('test placeholder');
   });
