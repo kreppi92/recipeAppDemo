@@ -1,5 +1,5 @@
 import React from 'react';
-import { createShallow, getClasses } from '@material-ui/core/test-utils';
+import { createShallow } from '@material-ui/core/test-utils';
 import NewRecipeInput from './NewRecipeInput';
 
 describe('<NewRecipeInput />', () => {
@@ -7,10 +7,9 @@ describe('<NewRecipeInput />', () => {
 
   beforeAll(()=> {
     shallow=createShallow();
-    classes= getClasses(<NewRecipeInput/>);
   });
 
-  it('should be a form element', () => {
+  it('should be a TextField of text type', () => {
     const props = {
       placeholder: "description",
       onChange: jest.fn(),
@@ -18,15 +17,12 @@ describe('<NewRecipeInput />', () => {
       value: "this is a test",
       onSaveClick: jest.fn(),
       uppercase: jest.fn(),
-      label: "description"
     };
 
     const wrapper = shallow(<NewRecipeInput {...props} />);
-    const inputType = wrapper.find('TextField').checkType();
+    const inputType = wrapper.find('TextField').props().type;
 
-    console.log(wrapper.find('TextField').checkType());
-
-    expect(inputType).toEqual('form');
+    expect(inputType).toEqual('text');
   });
 
   it('should handle change', () => {
@@ -37,19 +33,18 @@ describe('<NewRecipeInput />', () => {
         value: "1",
         onSaveClick: jest.fn(),
         uppercase: jest.fn(),
-        label: "description"
     };
 
     const wrapper = shallow(<NewRecipeInput {...props} />);
     const changeEvent = {target: {value: "2"}};
 
-    expect(wrapper.find('TextField').onChange).not.toBeCalled();
-    wrapper.find('TextField').props().simulate('change', changeEvent);
-    expect(wrapper.find('TextField').onChange).toBeCalledWith(changeEvent);
+    expect(wrapper.find('TextField').props().onChange).not.toBeCalled();
+    wrapper.find('TextField').simulate('change', changeEvent);
+    expect(wrapper.find('TextField').props().onChange).toBeCalledWith(changeEvent);
   });
 
   // Example of testing the value of a prop
-  it('should apply placeholder', () => {
+  it('should check placeholder', () => {
     const props = {
         placeholder: 'test placeholder',
         onChange: jest.fn(),
@@ -57,11 +52,10 @@ describe('<NewRecipeInput />', () => {
         value: ["this is a test"],
         onSaveClick: jest.fn(),
         uppercase: jest.fn(),
-        label: "description"
     };
 
     const wrapper = shallow(<NewRecipeInput {...props} />);
-    const placeholder = wrapper.find('TextField').dive().find('input').prop('placeholder');
+    const placeholder = wrapper.find('TextField').props().placeholder;
 
     expect(placeholder).toEqual('test placeholder');
   });
