@@ -1,5 +1,7 @@
 <p>
 
+<a href="https://recipe-app-demo-slingshot.herokuapp.com/"> LINK TO DEPLOYED DEMO CODE ON HEROKU </a>
+
 THIS IS A SMALL RECIPE APP DEMO BUILT USING THE FOLLOWING TECHNOLOGIES:
 - REACTJS
 - REDUX
