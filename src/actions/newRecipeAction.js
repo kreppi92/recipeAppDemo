@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 import { getFormattedDateTime } from '../utils/dates';
-import { v4 } from 'node-uuid'
+import { v4 } from 'uuid'
 
 export function saveNewRecipe(settings, fieldName, value) {
     return {

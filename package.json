@@ -18,7 +18,7 @@
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
     "prebuild": "npm run lint && npm run test && npm run clean-dist",
-    "build": "npm upgrade caniuse-lite browserslist babel-node tools/build.js && npm run open:dist",
+    "build": "babel-node tools/build.js && npm run open:dist",
     "test": "jest",
     "test:CI": "jest",
     "test:cover": "npm run test -- --coverage ",
@@ -32,15 +32,17 @@
   "dependencies": {
     "@material-ui/core": "3.8.1",
     "@material-ui/icons": "3.0.1",
+    "caniuse-lite": "1.0.30000929",
     "connected-react-router": "4.4.1",
-    "node-uuid": "1.4.8",
     "object-assign": "4.1.1",
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "react-redux": "5.0.7",
+    "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "redux": "4.0.0",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "uuid": "3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0",
